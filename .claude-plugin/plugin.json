@@ -11,9 +11,17 @@
   "homepage": "https://docs.whappy.ai/integrations/mcp",
   "repository": "https://github.com/whappyAI/whappy-ai-plugins",
   "license": "MIT",
-  "keywords": ["whappy", "whatsapp", "instagram", "lead-qualification", "ai-setter", "mcp"],
+  "keywords": [
+    "whappy",
+    "whatsapp",
+    "instagram",
+    "lead-qualification",
+    "ai-setter",
+    "mcp"
+  ],
   "documentationUrl": "https://docs.whappy.ai/integrations/mcp",
   "supportUrl": "https://docs.whappy.ai/support/contact-support",
   "privacyPolicyUrl": "https://whappy.ai/legal/privacy",
-  "termsOfServiceUrl": "https://whappy.ai/legal/terms"
+  "termsOfServiceUrl": "https://whappy.ai/legal/terms",
+  "icon": "./assets/icon.png"
 }
