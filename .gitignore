@@ -1,0 +1,11 @@
+# Never commit key material (the MCP Registry key lives outside this repo)
+*.pem
+*.key
+private-key*
+key.pem
+
+# Local tools
+mcp-publisher
+node_modules/
+__pycache__/
+.DS_Store

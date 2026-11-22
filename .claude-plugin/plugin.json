@@ -1,0 +1,19 @@
+{
+  "name": "whappy",
+  "displayName": "Whappy",
+  "version": "0.1.0",
+  "description": "Build WhatsApp and Instagram AI-setter campaigns, review your Whappy inbox and get weekly results, through the Whappy connector.",
+  "author": {
+    "name": "Whappy",
+    "email": "team@whappy.ai",
+    "url": "https://whappy.ai"
+  },
+  "homepage": "https://docs.whappy.ai/integrations/mcp",
+  "repository": "https://github.com/whappyAI/whappy-ai-plugins",
+  "license": "MIT",
+  "keywords": ["whappy", "whatsapp", "instagram", "lead-qualification", "ai-setter", "mcp"],
+  "documentationUrl": "https://docs.whappy.ai/integrations/mcp",
+  "supportUrl": "https://docs.whappy.ai/support/contact-support",
+  "privacyPolicyUrl": "https://whappy.ai/legal/privacy",
+  "termsOfServiceUrl": "https://whappy.ai/legal/terms"
+}

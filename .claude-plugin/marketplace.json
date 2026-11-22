@@ -1,0 +1,18 @@
+{
+  "name": "whappy-ai-plugins",
+  "description": "Whappy's official plugins: build AI-setter campaigns, review the inbox and read weekly results from your assistant.",
+  "owner": {
+    "name": "Whappy",
+    "email": "team@whappy.ai",
+    "url": "https://whappy.ai"
+  },
+  "plugins": [
+    {
+      "name": "whappy",
+      "source": "./",
+      "description": "Build WhatsApp and Instagram AI-setter campaigns, review your Whappy inbox and get weekly results.",
+      "category": "productivity",
+      "tags": ["whatsapp", "instagram", "sales", "lead-qualification"]
+    }
+  ]
+}

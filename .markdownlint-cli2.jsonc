@@ -1,0 +1,10 @@
+{
+  // https://github.com/DavidAnson/markdownlint-cli2
+  "config": {
+    "default": true,
+    // Prose is wrapped by hand; tables and URLs make lines long.
+    "MD013": false
+  },
+  "globs": ["**/*.md"],
+  "ignores": ["node_modules/**"]
+}

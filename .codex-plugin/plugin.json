@@ -1,0 +1,33 @@
+{
+  "name": "whappy",
+  "version": "0.1.0",
+  "description": "Build WhatsApp and Instagram AI-setter campaigns, review your Whappy inbox and get weekly results, through the Whappy connector.",
+  "author": {
+    "name": "Whappy",
+    "email": "team@whappy.ai",
+    "url": "https://whappy.ai"
+  },
+  "homepage": "https://docs.whappy.ai/integrations/mcp",
+  "repository": "https://github.com/whappyAI/whappy-ai-plugins",
+  "license": "MIT",
+  "keywords": ["whappy", "whatsapp", "instagram", "lead-qualification", "ai-setter"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Whappy",
+    "shortDescription": "Build AI-setter campaigns and review your WhatsApp and Instagram inbox",
+    "longDescription": "Describe a business and Whappy builds the AI-setter campaign: funnel, knowledge and qualifying questions, then rehearses it with synthetic leads. Review unread and stuck chats each day, and get a weekly report of stats, funnel and coaching suggestions. Launching a campaign stays a click in the Whappy dashboard.",
+    "developerName": "Whappy",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write"],
+    "websiteURL": "https://whappy.ai",
+    "privacyPolicyURL": "https://whappy.ai/legal/privacy",
+    "termsOfServiceURL": "https://whappy.ai/legal/terms",
+    "supportURL": "https://docs.whappy.ai/support/contact-support",
+    "defaultPrompt": [
+      "Build a Whappy campaign for my business from my website",
+      "Review my Whappy inbox: what needs me today?",
+      "Give me this week's Whappy report"
+    ]
+  }
+}

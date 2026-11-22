@@ -1,0 +1,4 @@
+{
+  // Command files are prompts sent to the model, not documents: no title heading.
+  "MD041": false
+}

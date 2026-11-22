@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/whappyAI/whappy-ai-plugins/schemas/codex-plugin.schema.json",
+  "title": "Codex compatibility plugin manifest (.codex-plugin/plugin.json)",
+  "description": "OpenAI publishes no JSON schema for this file. This schema follows https://developers.openai.com/plugins/build/plugins.md and the parser codex-rs/core-plugins/src/manifest.rs (RawPluginManifest, openai/codex@cf3ff1530d821ec2d26452da4971d8e3e7d18d25), and is stricter: paths must start with ./ and stay inside the plugin, and no hooks are allowed.",
+  "type": "object",
+  "required": ["name", "version", "description", "skills", "mcpServers", "interface"],
+  "additionalProperties": false,
+  "definitions": {
+    "relativePath": {
+      "type": "string",
+      "pattern": "^\\./(?!.*(^|/)\\.\\.(/|$)).+"
+    },
+    "httpsUrl": {
+      "type": "string",
+      "pattern": "^https://[^\\s]+$"
+    }
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.-]+)?$"
+    },
+    "description": { "type": "string", "minLength": 1 },
+    "author": {
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "email": { "type": "string", "pattern": "^[^@\\s]+@[^@\\s]+$" },
+        "url": { "$ref": "#/definitions/httpsUrl" }
+      }
+    },
+    "homepage": { "$ref": "#/definitions/httpsUrl" },
+    "repository": { "$ref": "#/definitions/httpsUrl" },
+    "license": { "type": "string", "minLength": 1 },
+    "keywords": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+    "skills": {
+      "oneOf": [
+        { "$ref": "#/definitions/relativePath" },
+        { "type": "array", "minItems": 1, "items": { "$ref": "#/definitions/relativePath" } }
+      ]
+    },
+    "mcpServers": { "$ref": "#/definitions/relativePath" },
+    "apps": { "$ref": "#/definitions/relativePath" },
+    "interface": {
+      "type": "object",
+      "required": [
+        "displayName",
+        "shortDescription",
+        "longDescription",
+        "developerName",
+        "category",
+        "capabilities",
+        "websiteURL",
+        "privacyPolicyURL",
+        "termsOfServiceURL",
+        "defaultPrompt"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "displayName": { "type": "string", "minLength": 1 },
+        "shortDescription": { "type": "string", "minLength": 1 },
+        "longDescription": { "type": "string", "minLength": 1 },
+        "developerName": { "type": "string", "minLength": 1 },
+        "category": { "type": "string", "minLength": 1 },
+        "capabilities": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["Interactive", "Read", "Write"] },
+          "uniqueItems": true
+        },
+        "websiteURL": { "$ref": "#/definitions/httpsUrl" },
+        "privacyPolicyURL": { "$ref": "#/definitions/httpsUrl" },
+        "termsOfServiceURL": { "$ref": "#/definitions/httpsUrl" },
+        "supportURL": { "$ref": "#/definitions/httpsUrl" },
+        "defaultPrompt": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "items": { "type": "string", "minLength": 1, "maxLength": 512 }
+        },
+        "brandColor": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+        "brandColorDark": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+        "composerIcon": { "$ref": "#/definitions/relativePath" },
+        "logo": { "$ref": "#/definitions/relativePath" },
+        "logoDark": { "$ref": "#/definitions/relativePath" },
+        "screenshots": { "type": "array", "items": { "$ref": "#/definitions/relativePath" } }
+      }
+    }
+  }
+}

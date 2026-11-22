@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  CLAUDE_CODE_VERSION: 2.1.330
+  AJV_CLI_VERSION: 5.0.0
+  MARKDOWNLINT_CLI2_VERSION: 0.24.2
+  MCP_PUBLISHER_VERSION: v1.8.12
+
+jobs:
+  claude-plugin-validate:
+    name: claude plugin validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22"
+      - name: Install Claude Code
+        run: npm install --global "@anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}"
+      - name: Validate the plugin and its marketplace
+        run: |
+          claude plugin validate . --strict
+          claude plugin validate .claude-plugin/marketplace.json --strict
+
+  codex-manifest-schema:
+    name: Codex manifest schema
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22"
+      - name: Validate .codex-plugin/plugin.json
+        run: npx --yes "ajv-cli@${AJV_CLI_VERSION}" validate --spec=draft7 --all-errors -s schemas/codex-plugin.schema.json -d .codex-plugin/plugin.json
+      - name: Validate .agents/plugins/marketplace.json
+        run: npx --yes "ajv-cli@${AJV_CLI_VERSION}" validate --spec=draft7 --all-errors -s schemas/codex-marketplace.schema.json -d .agents/plugins/marketplace.json
+
+  mcp-registry-validate:
+    name: server.json (MCP Registry)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6 # v4.1.2
+      - name: Install mcp-publisher (signature verified)
+        run: scripts/install-mcp-publisher.sh
+      - name: Validate server.json without publishing
+        run: ./mcp-publisher validate server.json
+
+  markdown-lint:
+    name: Markdown lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22"
+      - name: markdownlint-cli2
+        run: npx --yes "markdownlint-cli2@${MARKDOWNLINT_CLI2_VERSION}"
+
+  package-tests:
+    name: Package contract tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+      - name: MCP URL, manifest consistency, skill tool names, no secrets
+        run: python -m unittest discover -s tests -v

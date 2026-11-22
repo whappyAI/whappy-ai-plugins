@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "ai.whappy/whappy",
+  "title": "Whappy",
+  "description": "Build and rehearse WhatsApp and Instagram AI-setter campaigns, and read leads, chats and results.",
+  "version": "0.1.0",
+  "websiteUrl": "https://whappy.ai",
+  "repository": {
+    "url": "https://github.com/whappyAI/whappy-ai-plugins",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.whappy.ai/mcp"
+    }
+  ]
+}

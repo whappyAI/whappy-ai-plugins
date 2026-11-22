@@ -1,0 +1,20 @@
+{
+  "name": "whappy-ai-plugins",
+  "interface": {
+    "displayName": "Whappy"
+  },
+  "plugins": [
+    {
+      "name": "whappy",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
